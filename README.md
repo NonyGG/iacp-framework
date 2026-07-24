@@ -37,16 +37,16 @@ Existing agent frameworks couple communication logic to runtime specifics. IACP 
 
 ```
 ┌──────────────────────────────────────────────────┐
-│                  Agent Layer                      │
+│                  Agent Layer                     │
 │  (Your application logic, models, workflows)     │
 ├──────────────────────────────────────────────────┤
-│            IACP Protocol Layer                    │
+│            IACP Protocol Layer                   │
 │  Message Envelope · Schema Registry · Routing    │
 ├──────────────────────────────────────────────────┤
-│           Transport Abstraction Layer             │
+│           Transport Abstraction Layer            │
 │  IPC · TCP · MQ · WebSocket · Custom             │
 ├──────────────────────────────────────────────────┤
-│              Observable Stream                    │
+│              Observable Stream                   │
 │  Events · Metrics · Audit Trail                  │
 └──────────────────────────────────────────────────┘
 ```
