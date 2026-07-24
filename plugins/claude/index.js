@@ -1,0 +1,1 @@
+'use strict'; class ClaudeConnector { constructor(o={}) { this.name='claude'; this._transport=o.transport||null; this.ready=!!o.transport; } send(p) { return this._transport?this._transport.deliver(JSON.stringify({from:this.name,...p})):null; } connect() { this.ready=true; return this; } } module.exports={ClaudeConnector};

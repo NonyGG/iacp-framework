@@ -1,0 +1,9 @@
+{
+  "name": "@iacp/framework",
+  "version": "0.2.0",
+  "description": "Institutional Agent Communication Protocol — Node.js SDK",
+  "main": "index.js",
+  "license": "Apache-2.0",
+  "keywords": ["iacp", "agent", "protocol", "communication", "institutional"],
+  "engines": { "node": ">=16" }
+}
