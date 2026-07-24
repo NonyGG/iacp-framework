@@ -1,0 +1,22 @@
+name: Python SDK
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  python:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        py: ['3.9', '3.10', '3.11', '3.12']
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.py }}
+      - name: Test Python SDK import
+        run: python -c "import sys; sys.path.insert(0,'sdk/python'); from iacp.client import Client; from iacp.server import Server; c=Client('t'); s=Server('t'); s.register_service('ping',lambda p:{'ok':True}); print('Python SDK OK')"

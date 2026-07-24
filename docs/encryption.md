@@ -1,4 +1,4 @@
-# Observability
+# Encryption
 
 Part of the IACP production hardening layer. Additional modules:
 - Security: identity, authentication, authorization, policies

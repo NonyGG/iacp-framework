@@ -1,0 +1,35 @@
+name: Release Validation
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run all test suites
+        run: |
+          node tests/unit/core.test.js
+          node tests/unit/communication.test.js
+          node tests/unit/phase4.test.js
+      - name: Validate Python SDK
+        run: python -c "import sys; sys.path.insert(0,'sdk/python'); from iacp import Client, Server, Workflow, Runtime; print('Python SDK OK')"
+      - name: Validate Version
+        run: |
+          TAG=${GITHUB_REF#refs/tags/v}
+          echo "Release version: $TAG"
+          grep -q "\"version\": \"$TAG\"" sdk/node/package.json && echo "Node version OK"
+          grep -q "version = \"$TAG\"" sdk/rust/Cargo.toml && echo "Rust version OK" || echo "Warning: Rust version mismatch (expected pre-release)"
+      - name: Create Release Summary
+        run: |
+          echo "## Release Validation" >> $GITHUB_STEP_SUMMARY
+          echo "All checks passed for ${{ github.ref }}" >> $GITHUB_STEP_SUMMARY

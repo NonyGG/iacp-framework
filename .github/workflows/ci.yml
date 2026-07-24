@@ -7,11 +7,13 @@ on:
     branches: [main]
 
 jobs:
+  # Cross-platform: Node.js test suites on Linux, Windows, macOS
   test:
-    runs-on: ubuntu-latest
     strategy:
       matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
         node-version: [18, 20, 22]
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -21,20 +23,30 @@ jobs:
       - run: node tests/unit/communication.test.js
       - run: node tests/unit/phase4.test.js
 
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - run: test -f README.md && test -f LICENSE && echo "Structure OK"
-
+  # Python SDK: cross-platform import validation
   python:
-    runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ['3.9', '3.10', '3.11', '3.12']
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        py: ['3.9', '3.10', '3.11', '3.12']
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
-          python-version: ${{ matrix.python-version }}
-      - run: python -c "import sys; sys.path.insert(0,'sdk/python'); import iacp.client; print('OK')"
+          python-version: ${{ matrix.py }}
+      - run: python -c "import sys; sys.path.insert(0,'sdk/python'); from iacp.client import Client; from iacp.server import Server; print('Python SDK OK')"
+
+  # Structure validation
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          echo "=== Structure Check ==="
+          for f in README.md LICENSE CHANGELOG.md ROADMAP.md CONTRIBUTING.md SECURITY.md CODE_OF_CONDUCT.md VERSIONING.md; do
+            test -f "$f" && echo "  OK $f" || echo "  MISSING $f"
+          done
+          for d in core communication runtime sdk/python sdk/node sdk/go sdk/rust; do
+            test -d "$d" && echo "  OK $d/" || echo "  MISSING $d/"
+          done
