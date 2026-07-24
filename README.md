@@ -179,10 +179,10 @@ Each connector translates harness-specific calls to IACP protocol messages. No c
 | 2 | Core protocol: message envelope, events, context, AST, versioning | ✅ Complete |
 | 3 | Communication infrastructure: message bus, event bus, queues, transport, routing | ✅ Complete |
 | 4 | SDK, plugin system, connectors (9 harnesses), runtime | ✅ Complete |
-| 5 | GitHub publication, CI/CD, cross-platform validation | 🚧 In Progress |
-| 6 | REST, WebSocket, gRPC transport adapters | Planning |
-| 7 | Production hardening: security, encryption, rate limiting | Planning |
-| 8 | Ecosystem: marketplace, plugin discovery, documentation site | Planning |
+| 5 | GitHub publication, CI/CD, cross-platform validation | ✅ Complete |
+| 6 | REST, WebSocket, gRPC transport adapters | ✅ Complete |
+| 7 | Production hardening: security, encryption, rate limiting | ✅ Complete |
+| 8 | Ecosystem: marketplace, plugin discovery, documentation site | ✅ Complete |
 
 **Tests:** 134/134 (100%) across all phases.
 
