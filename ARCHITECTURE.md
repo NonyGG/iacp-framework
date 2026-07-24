@@ -8,17 +8,17 @@ The IACP Framework is organized as a layered protocol stack. Each layer has a si
 
 ```
 ┌────────────────────────────────────────────┐
-│              Application Layer              │
+│              Application Layer             │
 │  Agent logic, workflows, business rules    │
 ├────────────────────────────────────────────┤
-│               Protocol Layer                │
+│               Protocol Layer               │
 │  Envelope, schema registry, routing        │
 ├────────────────────────────────────────────┤
-│              Transport Layer                │
+│              Transport Layer               │
 │  IPC, TCP, WebSocket, message queues       │
 ├────────────────────────────────────────────┤
-│             Serialization Layer             │
-│  JSON, CBOR, Protocol Buffers             │
+│             Serialization Layer            │
+│  JSON, CBOR, Protocol Buffers              │
 └────────────────────────────────────────────┘
 ```
 
