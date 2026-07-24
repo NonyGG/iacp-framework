@@ -1,0 +1,11 @@
+[package]
+name = "iacp-framework"
+version = "0.2.0"
+edition = "2021"
+description = "Institutional Agent Communication Protocol (IACP) Framework — Rust SDK"
+license = "Apache-2.0"
+repository = "https://github.com/iacp-framework/core"
+categories = ["network-programming", "development-tools"]
+keywords = ["iacp", "agent", "protocol", "communication", "institutional"]
+
+[dependencies]
